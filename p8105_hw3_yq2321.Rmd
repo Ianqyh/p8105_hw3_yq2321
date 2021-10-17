@@ -24,3 +24,11 @@ scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
 ```
 
+
+## Problem 1
+
+```{r}
+data("instacart")
+```
+
+The "instacart" dataset contains 1384617 obsevations in total and each row in the dataset represents a product from an order. There are 15 variables in this dataset. The order_id variable is the order identifier. The product_id variable is the product identifier. The add_to cart_order variable represents the order in which each product was added to cart. The reordered variable is 1 if this prodcut has been ordered by this user in the past and 0 otherwise. The user_id variable is the customer identifier. The eval_set variable represents  which evaluation set this order belongs in. The order_number variable is the order sequence number for this user (1 = first,  n = nth). The order_dow variable represents the day of the week on which the order was placed. The order_hour_of_day variable is the hour of the day on which the order was placed. The days_since_prior_order represents days since the last order, capped at 30, NA if order_number = 1. The product_name variable is the name of the product. The aisle_id variable is the aisle identifier. The department_id variable is the department identifier. The aisle variable represents the name of the aisle the product is in. The department variable represents the name of the department the product is in.
