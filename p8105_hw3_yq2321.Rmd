@@ -42,7 +42,16 @@ instacart %>%
 
 From the table above, we can see that there are 134 aisles and the top 10 aisles that most items are ordered from include fresh vegetables, fresh fruits, packaged vegetable fruits, yogurt, packaged cheese, water seltzer sparkling water, milk, chips pretzels, soy lactosefree, and bread.
 
+```{r}
+instacart %>%
+  group_by(aisle) %>%
+  summarize(total = n()) %>%
+  arrange(desc(total)) %>%
+  filter(total > 10000) %>%
+  mutate(aisle = fct_reorder(aisle, total)) %>%
+  ggplot(aes(x = total, y = aisle)) + geom_point() + labs(title = "Top 39 Aisles With Most Items Ordered", xlab = "Number of items", ylab = "Aisle") + scale_x_continuous(breaks = seq(from = 0, to = 160000, by = 20000))
 
+```
 
 
 
