@@ -67,5 +67,17 @@ instacart %>%
 
 The table above shows the three most popular items in each of the aisles “baking ingredients”, “dog food care”, and “packaged vegetables along with the number of times ordered.
 
+```{r}
+instacart %>%
+  filter(product_name %in% c("Pink Lady Apples", "Coffee Ice Cream")) %>%
+  group_by(product_name, order_dow) %>%
+  summarize(mean_hour_day = mean(order_hour_of_day)) %>%
+  pivot_wider(
+    names_from = "order_dow",
+    values_from = "mean_hour_day"
+  ) %>%
+  knitr::kable()
+```
 
+The table above shows the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week (0 represents the first day of the week).
 
