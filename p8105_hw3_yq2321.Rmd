@@ -81,3 +81,10 @@ instacart %>%
 
 The table above shows the mean hour of the day at which Pink Lady Apples and Coffee Ice Cream are ordered on each day of the week (0 represents the first day of the week).
 
+
+## Problem 2
+
+```{r}
+data("brfss_smart2010")
+```
+
