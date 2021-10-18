@@ -88,3 +88,14 @@ The table above shows the mean hour of the day at which Pink Lady Apples and Cof
 data("brfss_smart2010")
 ```
 
+```{r}
+brfss_smart_cleaned = brfss_smart2010 %>%
+  janitor::clean_names() %>%
+  filter(topic == "Overall Health") %>%
+  mutate(response = factor(response, c("Poor", "Fair", "Good", "Very good", "Excellent"))) %>%
+  separate(locationdesc, into = c("state", "location"), sep = ' - ') %>%
+  select(-locationabbr)
+```
+
+The above code chunk cleans the data by formatting the data to use appropriate variable names, focusing on the "Overall Health" topic, including only responses from “Excellent” to “Poor”, and organizing responses as a factor taking levels ordered from “Poor” to “Excellent”.
+
