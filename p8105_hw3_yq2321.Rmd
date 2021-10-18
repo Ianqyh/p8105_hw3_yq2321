@@ -99,3 +99,26 @@ brfss_smart_cleaned = brfss_smart2010 %>%
 
 The above code chunk cleans the data by formatting the data to use appropriate variable names, focusing on the "Overall Health" topic, including only responses from “Excellent” to “Poor”, and organizing responses as a factor taking levels ordered from “Poor” to “Excellent”.
 
+```{r}
+brfss_smart_cleaned %>%
+  filter(year == 2002) %>%
+  group_by(state) %>%
+  distinct(location) %>%
+  summarize(times = n()) %>%
+  filter(times >= 7) %>%
+  arrange(times)
+```
+
+The result above showed that CT, FL, NC, MA, NJ, and PA were observed at 7 or more locations in 2002.
+
+```{r}
+brfss_smart_cleaned %>%
+  filter(year == 2010) %>%
+  group_by(state) %>%
+  distinct(location) %>%
+  summarize(times = n()) %>%
+  filter(times >= 7) %>%
+  arrange(times)
+```
+
+The result above showed that CO, PA, SC, OH, MA, NY, NE, WA, CA, MD, NC, TX, NJ, and FL were observed at 7 or more locations in 2010.
