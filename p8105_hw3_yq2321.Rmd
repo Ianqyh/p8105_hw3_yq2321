@@ -6,6 +6,7 @@ output: github_document
 ```{r}
 library(tidyverse)
 library(p8105.datasets)
+library(patchwork)
 
 knitr::opts_chunk$set(
   fig.width = 6,
@@ -145,6 +146,21 @@ excellent_dataset %>%
 The plot above shows a line of average value across locations for each state over years.
 
 
+```{r}
+NY_data_value_2006 = brfss_smart_cleaned %>%
+  filter(year == 2006, state == "NY") %>%
+  ggplot(aes(x = data_value, fill = response)) +
+  geom_density(alpha = .4) + theme(legend.position = "none") +
+  labs(title = "2006")
+NY_data_value_2010 = brfss_smart_cleaned %>%
+  filter(year == 2010, state == "NY") %>%
+  ggplot(aes(x = data_value, fill = response)) +
+  geom_density(alpha = .4) + labs(title = "2010")
+NY_data_value_2006 + NY_data_value_2010
+```
+
+The two-panel plot above shows the distribution of data_value for responses among locations in NY state for year 2006 and 2010 respectively.
+
 ## Problem 3
 
 ```{r}
@@ -153,9 +169,20 @@ accelerometer_data = read_csv("hw3 data/accel_data.csv")
 
 ```{r}
 accelerometer_data_final = accelerometer_data %>%
-  pivot_longer(cols = activity.1:activity.1440, names_to = "activity number", names_prefix = "activity.", values_to = "activity counts") %>%
+  pivot_longer(cols = activity.1:activity.1440, names_to = "activity number", names_prefix = "activity.", values_to = "activity counts") %>% janitor::clean_names() %>%
   mutate(weekday_or_weekend = ifelse(day %in% c("Saturday", "Sunday"), "weekend", "weekday"))
 accelerometer_data_final
 ```
 
 The resulting dataset contains `r nrow(accelerometer_data_final)` observations and `r ncol(accelerometer_data_final)` variables. The names of these variables are `r names(accelerometer_data_final)`.
+
+```{r}
+accelerometer_data_final %>%
+  group_by(day_id) %>%
+  summarize(total_activity = sum(activity_counts)) %>%
+  knitr::kable()
+```
+
+The table above shows the total activity for each day. We can see that the total activity generally remains high and stable over time, except for a few days when it drastically decreases, for example, day 2, day 24, and day 24.
+≥
+
