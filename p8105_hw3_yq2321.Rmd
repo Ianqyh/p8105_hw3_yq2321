@@ -145,3 +145,17 @@ excellent_dataset %>%
 The plot above shows a line of average value across locations for each state over years.
 
 
+## Problem 3
+
+```{r}
+accelerometer_data = read_csv("hw3 data/accel_data.csv")
+```
+
+```{r}
+accelerometer_data_final = accelerometer_data %>%
+  pivot_longer(cols = activity.1:activity.1440, names_to = "activity number", names_prefix = "activity.", values_to = "activity counts") %>%
+  mutate(weekday_or_weekend = ifelse(day %in% c("Saturday", "Sunday"), "weekend", "weekday"))
+accelerometer_data_final
+```
+
+The resulting dataset contains `r nrow(accelerometer_data_final)` observations and `r ncol(accelerometer_data_final)` variables. The names of these variables are `r names(accelerometer_data_final)`.
