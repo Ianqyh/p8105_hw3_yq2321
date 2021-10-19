@@ -183,6 +183,12 @@ accelerometer_data_final %>%
   knitr::kable()
 ```
 
-The table above shows the total activity for each day. We can see that the total activity generally remains high and stable over time, except for a few days when it drastically decreases, for example, day 2, day 24, and day 24.
-≥
+The table above shows the total activity for each day. We can see that the total activity generally remains high and stable over time, except for a few days when it drastically decreases, for example, day 2, day 24, and day 31.
 
+
+```{r}
+accelerometer_data_final %>%
+  mutate(activity_number_hours = as.numeric(activity_number) / 60) %>%
+  ggplot(aes(x = activity_number_hours, y = activity_counts, color = day)) + geom_smooth(se = FALSE) + labs(title = "Average 24-hour activity for each day of the week", x = "Activity number (in hour)", y = "Average activity" )
+```
+From the plot above, we can see that there are two notable peaks for Thursday and Friday, at 11 am and 9 pm respectively. This indicates that the participant might engage in some activities that demand a lot of physical energies. In addition, the activity tends to be lower at night. This is reasonable as the participant is relatively stationary when he falls asleep. There are little difference in average activity among each day of the week as well as between weekdays and weekends.
