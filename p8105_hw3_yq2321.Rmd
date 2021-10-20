@@ -137,8 +137,8 @@ The dataset above is limited to Excellent responses, and contains year, state, a
 
 ```{r}
 excellent_dataset %>%
-  ggplot(aes(x = year, y = mean_data_value)) +
-  geom_line(aes(group = state)) + 
+  ggplot(aes(x = year, y = mean_data_value, color = state)) +
+  geom_line(aes(group = state)) + theme(legend.position = "right")
   labs(title = "Average data value of excellent responses across locations within a state",
        y = "Average data value wthin a state")
 ```
